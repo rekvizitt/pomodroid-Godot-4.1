@@ -1,2 +1,3 @@
-# pomodroid-Godot-4.1-
+# pomodroid-Godot-4.1
+WORK IN PROGRESS...
 I made this app on godot v.4.1
