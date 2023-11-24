@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://dsrmi1ag8m78x"]
+
+[ext_resource type="Script" path="res://scripts/timers.gd" id="1_eijyo"]
+
+[node name="timers" type="Node"]
+script = ExtResource("1_eijyo")
+
+[node name="focus_timer" type="Timer" parent="."]
+
+[node name="short_break_timer" type="Timer" parent="."]
+
+[node name="long_break_timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="focus_timer" to="." method="_on_focus_timer_timeout"]
+[connection signal="timeout" from="short_break_timer" to="." method="_on_short_break_timer_timeout"]
+[connection signal="timeout" from="long_break_timer" to="." method="_on_long_break_timer_timeout"]
