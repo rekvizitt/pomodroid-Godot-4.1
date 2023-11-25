@@ -6,9 +6,12 @@ var following = false
 var dragging_start_position = Vector2()
 # current timer
 var curr_timer
-var temp_time = Global.focus_time
+var temp_time
 # current timer state
 var timer_state = "stop"
+
+func _ready():
+	temp_time = Global.data["focus_time"]
 
 func _on_titlebar_gui_input(event):
 	if event is InputEventMouseButton:
@@ -30,17 +33,17 @@ func _process(_delta):
 # set time
 func set_time():
 	if curr_timer.time_left != 0 and timer_state == "start":
-		var minutes = int(curr_timer.time_left/60) % 60
+		var minutes = int(curr_timer.time_left/60) % 91
 		var seconds = int(curr_timer.time_left) % 60
 		$time.text = "%02d : %02d" % [minutes, seconds]
 	else:
-		var minutes = int(temp_time/60) % 60
+		var minutes = int(temp_time/60) % 91
 		var seconds = int(temp_time) % 60
 		$time.text = "%02d : %02d" % [minutes, seconds]
 
 # set rounds info
 func set_rounds_info():
-	$rounds_info.text = str(Global.gone_rounds) + "/" + str(Global.rounds)
+	$rounds_info.text = str(Global.gone_rounds) + "/" + str(Global.data["rounds"])
 
 # close button logic
 func _on_close_button_pressed():
@@ -67,9 +70,9 @@ func _on_stop_button_pressed():
 	$stop_button.visible = false
 
 func _on_skip_current_round_button_pressed():
-	if Global.gone_rounds != Global.rounds and Global.state == "short_break":
+	if Global.gone_rounds != Global.data["rounds"] and Global.state == "short_break":
 		Global.gone_rounds += 1
-	elif Global.gone_rounds == Global.rounds and Global.state == "long_break":
+	elif Global.gone_rounds == Global.data["rounds"] and Global.state == "long_break":
 		Global.gone_rounds = 1
 		# cycles +1
 	$timers.change_state()
@@ -77,29 +80,27 @@ func _on_skip_current_round_button_pressed():
 	temp_time = curr_timer.wait_time
 	if timer_state == "start":
 		curr_timer.start()
+	update_timer()
 
 # set state label
 func set_state_label():
 	if Global.state == "focus":
 		$state_info.text = "Focus"
+		$state_color.color = "fe517c"
 	elif Global.state == "short_break":
 		$state_info.text = "Short Break"
+		$state_color.color = "b5ffc4"
 	else:
 		$state_info.text = "Long Break"
+		$state_color.color = "a1fdff"
 
 
 func _on_reset_timer_button_pressed():
 	curr_timer.stop()
 	timer_state = "stop"
-	if Global.state == "focus":
-		curr_timer.wait_time = Global.focus_time
-	elif Global.state == "short_break":
-		curr_timer.wait_time = Global.short_break_time
-	else:
-		curr_timer.wait_time = Global.long_break_time
-	temp_time = curr_timer.wait_time
 	$start_button.visible = true
 	$stop_button.visible = false
+	update_timer()
 
 func _on_options_button_pressed():
 	$options_window.visible = true
@@ -110,3 +111,18 @@ func _on_go_back_button_pressed():
 	$options_window.visible = false
 	$go_back_button.visible = false
 	$options_button.visible = true
+	update_timer()
+
+func update_timer():
+	if timer_state == "start":
+		curr_timer.stop()
+		timer_state = "stop"
+		$start_button.visible = true
+		$stop_button.visible = false
+	if Global.state == "focus":
+		curr_timer.wait_time = Global.data["focus_time"]
+	elif Global.state == "short_break":
+		curr_timer.wait_time = Global.data["short_break_time"]
+	else:
+		curr_timer.wait_time = Global.data["long_break_time"]
+	temp_time = curr_timer.wait_time

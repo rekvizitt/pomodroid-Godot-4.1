@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://gw1m0on0lw4w"]
+[gd_scene load_steps=32 format=3 uid="uid://gw1m0on0lw4w"]
 
 [ext_resource type="Script" path="res://scripts/options_window.gd" id="1_fmn5u"]
 [ext_resource type="FontFile" uid="uid://dy4x8jtp5wjet" path="res://assets/fonts/arialroundedmtbold.ttf" id="1_x8xdt"]
@@ -33,6 +33,64 @@ texture = ExtResource("5_q21oc")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nomrv"]
 texture = ExtResource("5_q21oc")
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_lnua3"]
+color = Color(0.423529, 0.482353, 0.603922, 1)
+thickness = 8
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_8is0e"]
+color = Color(0.996078, 0.317647, 0.486275, 1)
+thickness = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x2t66"]
+bg_color = Color(0.278431, 0.278431, 0.278431, 0.490196)
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_kxgwo"]
+color = Color(0.423529, 0.482353, 0.603922, 1)
+thickness = 8
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_yufp8"]
+color = Color(0.709804, 1, 0.768627, 1)
+thickness = 8
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_2h7us"]
+color = Color(0.709804, 1, 0.768627, 1)
+thickness = 8
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_w8gwt"]
+color = Color(0.423529, 0.482353, 0.603922, 1)
+thickness = 8
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_7t4r3"]
+color = Color(0.631373, 0.992157, 1, 1)
+thickness = 8
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_pefmp"]
+color = Color(0.631373, 0.992157, 1, 1)
+thickness = 8
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_tbttr"]
+color = Color(0.894118, 0.913725, 1, 1)
+thickness = 8
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_idhqf"]
+color = Color(0.894118, 0.913725, 1, 1)
+thickness = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ywa0j"]
+bg_color = Color(0.184314, 0.219608, 0.294118, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iejwn"]
+bg_color = Color(0.156863, 0.188235, 0.254902, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h6at0"]
+bg_color = Color(0.184314, 0.219608, 0.294118, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7pscf"]
+bg_color = Color(0.184314, 0.219608, 0.294118, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mkg4y"]
+bg_color = Color(0.184314, 0.219608, 0.294118, 1)
 
 [node name="options_window" type="Control"]
 layout_mode = 3
@@ -121,7 +179,7 @@ theme_override_styles/pressed = SubResource("StyleBoxTexture_50gwm")
 theme_override_styles/disabled = SubResource("StyleBoxTexture_nomrv")
 theme_override_styles/focus = SubResource("StyleBoxTexture_nomrv")
 
-[node name="Label" type="Label" parent="."]
+[node name="options_label" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -129,29 +187,251 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -31.0
-offset_top = -181.0
+offset_top = -189.0
 offset_right = 31.0
-offset_bottom = -155.0
+offset_bottom = -163.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Options"
 
-[node name="Label2" type="Label" parent="."]
+[node name="focus_slider" type="HSlider" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -22.5
-offset_top = -138.0
-offset_right = 22.5
-offset_bottom = -112.0
+offset_left = -180.0
+offset_top = -105.0
+offset_right = 180.0
+offset_bottom = -89.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 0
+theme_override_styles/slider = SubResource("StyleBoxLine_lnua3")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_8is0e")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_8is0e")
+min_value = 1.0
+max_value = 90.0
+value = 30.0
+
+[node name="focus_label" type="Label" parent="."]
+layout_mode = 2
+offset_left = 227.5
+offset_top = 142.0
+offset_right = 272.5
+offset_bottom = 168.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(1, 1, 1, 0.666667)
 text = "Focus"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="focus_value" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = -134.0
+offset_right = 26.0
+offset_bottom = -108.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_x2t66")
+text = "12 : 00"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="short_break_label" type="Label" parent="."]
+layout_mode = 2
+offset_left = 204.5
+offset_top = 221.0
+offset_right = 295.5
+offset_bottom = 247.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.666667)
+text = "Short break"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="short_break_value" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = -55.0
+offset_right = 26.0
+offset_bottom = -29.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_x2t66")
+text = "12 : 00"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="short_break_slider" type="HSlider" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -180.0
+offset_top = -24.0
+offset_right = 180.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 0
+theme_override_styles/slider = SubResource("StyleBoxLine_kxgwo")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_yufp8")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_2h7us")
+min_value = 1.0
+max_value = 90.0
+value = 30.0
+
+[node name="long_break_label" type="Label" parent="."]
+layout_mode = 2
+offset_left = 208.0
+offset_top = 304.0
+offset_right = 299.0
+offset_bottom = 330.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.666667)
+text = "Long break"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="long_break_value" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = 31.0
+offset_right = 26.0
+offset_bottom = 57.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_x2t66")
+text = "12 : 00"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="long_break_slider" type="HSlider" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -180.0
+offset_top = 62.0
+offset_right = 180.0
+offset_bottom = 78.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 0
+theme_override_styles/slider = SubResource("StyleBoxLine_w8gwt")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_7t4r3")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_pefmp")
+min_value = 1.0
+max_value = 90.0
+value = 30.0
+
+[node name="rounds_label" type="Label" parent="."]
+layout_mode = 2
+offset_left = 208.0
+offset_top = 390.0
+offset_right = 299.0
+offset_bottom = 416.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.666667)
+text = "Rounds"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="rounds_value" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = 117.0
+offset_right = 26.0
+offset_bottom = 143.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_x2t66")
+text = "3"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="rounds_slider" type="HSlider" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -180.0
+offset_top = 148.0
+offset_right = 180.0
+offset_bottom = 164.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 0
+theme_override_styles/slider = SubResource("StyleBoxLine_w8gwt")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_tbttr")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_idhqf")
+min_value = 1.0
+max_value = 12.0
+value = 3.0
+
+[node name="set_default_button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -46.0
+offset_top = -69.0
+offset_right = 46.0
+offset_bottom = -38.0
+grow_horizontal = 2
+grow_vertical = 0
+focus_mode = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_ywa0j")
+theme_override_styles/hover = SubResource("StyleBoxFlat_iejwn")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_h6at0")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_7pscf")
+theme_override_styles/focus = SubResource("StyleBoxFlat_mkg4y")
+text = "Reset default"
 
 [connection signal="gui_input" from="titlebar" to="." method="_on_titlebar_gui_input"]
 [connection signal="pressed" from="titlebar/close_button" to="." method="_on_close_button_pressed"]
 [connection signal="pressed" from="titlebar/minimize_button" to="." method="_on_minimize_button_pressed"]
+[connection signal="value_changed" from="focus_slider" to="." method="_on_focus_slider_value_changed"]
+[connection signal="value_changed" from="short_break_slider" to="." method="_on_short_break_slider_value_changed"]
+[connection signal="value_changed" from="long_break_slider" to="." method="_on_long_break_slider_value_changed"]
+[connection signal="value_changed" from="rounds_slider" to="." method="_on_rounds_slider_value_changed"]
+[connection signal="pressed" from="set_default_button" to="." method="_on_set_default_button_pressed"]

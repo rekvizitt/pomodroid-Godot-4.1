@@ -6,7 +6,7 @@ var data
 var focus_time = 1800 # 60..5400
 var short_break_time = 300 # 60..5400
 var long_break_time = 900 # 60..5400
-var rounds = 3 # 0..11
+var rounds = 3 # 1..12
 var state = "focus" # focus, short_break, long_break
 
 var gone_rounds = 1

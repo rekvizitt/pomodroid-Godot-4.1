@@ -9,9 +9,9 @@ func _ready():
 	# load data
 	Global.load_data()
 	# set base time to timers
-	$focus_timer.wait_time = Global.focus_time
-	$short_break_timer.wait_time = Global.short_break_time
-	$long_break_timer.wait_time = Global.long_break_time
+	$focus_timer.wait_time = Global.data["focus_time"]
+	$short_break_timer.wait_time = Global.data["short_break_time"]
+	$long_break_timer.wait_time = Global.data["long_break_time"]
 
 # focus timer timeout logic
 func _on_focus_timer_timeout():
@@ -34,7 +34,7 @@ func _on_long_break_timer_timeout():
 
 # changing state after state timer timeout
 func change_state():
-	if Global.gone_rounds != Global.rounds:
+	if Global.gone_rounds != Global.data["rounds"]:
 		Global.state = "short_break" if Global.state == "focus" else "focus"
 	else:
 		Global.state = "long_break" if Global.state == "focus" else "focus"
