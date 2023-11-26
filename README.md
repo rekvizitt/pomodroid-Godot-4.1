@@ -8,11 +8,6 @@ Tomatotimer is a user-friendly and customizable Pomodoro timer. This app made wi
 
 ---
 
-- [Summary](#summary)
-- [Features](#features)
-- [Install](#install)
-- [License](#license)
-
 ## Summary
 The Pomodroid Timer app is a productivity application based on the Pomodoro Technique, designed to help users manage their time effectively and enhance their focus and productivity. Developed using the Godot Engine 4.1, this app provides a user-friendly interface and a range of features to assist users in implementing the Pomodoro Technique.
 
