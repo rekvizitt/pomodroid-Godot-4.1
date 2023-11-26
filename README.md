@@ -22,7 +22,7 @@ The Pomodroid Timer app is a productivity application based on the Pomodoro Tech
 - Logging timer actions
 
 ## Install
-Download the latest version from the [releases](https://github.com/Splode/pomotroid/releases) page.
+Download the latest version from the [releases](https://github.com/rekvizitt/pomodroid-Godot-4.1/releases) page.
 Pomodroid is available for Windows (as yet)
 
 ## License
