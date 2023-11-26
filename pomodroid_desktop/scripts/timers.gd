@@ -49,6 +49,9 @@ func change_state():
 	Global.save_data()
 
 func play_sound():
+	$AudioStreamPlayer.volume_db = lerpf(-25, 5, Global.data["sound"] / 100)
+	if Global.data["sound"] == 0:
+		$AudioStreamPlayer.volume_db = -80
 	if $AudioStreamPlayer.is_playing():
 		$AudioStreamPlayer.stop()
 	if Global.state == "focus":

@@ -101,6 +101,7 @@ func set_state_label():
 
 
 func _on_reset_timer_button_pressed():
+	play_sound()
 	curr_timer.stop()
 	timer_state = "stop"
 	$start_button.visible = true
@@ -168,6 +169,10 @@ func _on_sound_slider_value_changed(value):
 	Global.save_data()
 
 func play_sound():
+	$AudioStreamPlayer.volume_db = lerpf(-25, 5, Global.data["sound"] / 100)
+	if Global.data["sound"] == 0:
+		$AudioStreamPlayer.volume_db = -80
+	print($AudioStreamPlayer.volume_db)
 	if $AudioStreamPlayer.is_playing():
 		$AudioStreamPlayer.stop()
 	if Global.state == "focus":
