@@ -5,6 +5,7 @@ var gone_rounds = Global.gone_rounds
 # state value
 var state = Global.state
 
+
 func _ready():
 	# load data
 	Global.load_data()
@@ -15,11 +16,15 @@ func _ready():
 
 # focus timer timeout logic
 func _on_focus_timer_timeout():
+	# plays sound
+	play_sound()
 	# change state to short break or long break
 	change_state()
 
 # short break timer timeout logic
 func _on_short_break_timer_timeout():
+	# plays sound
+	play_sound()
 	# change state to focus
 	change_state()
 	# increase gone_rounds (one round is gone)
@@ -27,6 +32,8 @@ func _on_short_break_timer_timeout():
 
 # long break timer timeout logic
 func _on_long_break_timer_timeout():
+	# plays sound
+	play_sound()
 	# change state to focus (all rounds done)
 	change_state()
 	# set zero to gone rounds
@@ -40,3 +47,16 @@ func change_state():
 		Global.state = "long_break" if Global.state == "focus" else "focus"
 	# updating global state
 	Global.save_data()
+
+func play_sound():
+	if $AudioStreamPlayer.is_playing():
+		$AudioStreamPlayer.stop()
+	if Global.state == "focus":
+		$AudioStreamPlayer.stream = load("res://assets/sounds/sound_1.wav")
+		$AudioStreamPlayer.play()
+	elif Global.state == "short_break":
+		$AudioStreamPlayer.stream = load("res://assets/sounds/sound_2.wav")
+		$AudioStreamPlayer.play()
+	elif Global.state == "long_break":
+		$AudioStreamPlayer.stream = load("res://assets/sounds/sound_3.wav")
+		$AudioStreamPlayer.play()

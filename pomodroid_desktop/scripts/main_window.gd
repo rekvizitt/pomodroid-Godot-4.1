@@ -9,6 +9,8 @@ var curr_timer
 var temp_time
 # current timer state
 var timer_state = "stop"
+# for sound logic
+var processing = false
 
 func _ready():
 	temp_time = Global.data["focus_time"]
@@ -20,6 +22,8 @@ func _on_titlebar_gui_input(event):
 			dragging_start_position = get_local_mouse_position()
 
 func _process(_delta):
+	# sound
+	$sound_slider.value = Global.data["sound"]
 	# current timer
 	curr_timer = get_node("timers/" + Global.state + "_timer") 
 	# set info and time
@@ -70,6 +74,7 @@ func _on_stop_button_pressed():
 	$stop_button.visible = false
 
 func _on_skip_current_round_button_pressed():
+	play_sound()
 	if Global.gone_rounds != Global.data["rounds"] and Global.state == "short_break":
 		Global.gone_rounds += 1
 	elif Global.gone_rounds == Global.data["rounds"] and Global.state == "long_break":
@@ -126,3 +131,51 @@ func update_timer():
 	else:
 		curr_timer.wait_time = Global.data["long_break_time"]
 	temp_time = curr_timer.wait_time
+
+
+func _on_sound_button_gui_input(event):
+	if event is InputEventMouseMotion and !processing:
+		processing = true
+		$sound_slider.visible = true
+		await get_tree().create_timer(5.0).timeout
+		$sound_slider.visible = false
+		processing = false
+
+func _on_sound_slider_value_changed(value):
+	Global.data["sound"] = value
+	print(value)
+	# mute
+	if value == 0:
+		$sound_button.add_theme_stylebox_override("normal", load("res://ui/styleboxes/sound_mute_normal.tres"))
+		$sound_button.add_theme_stylebox_override("hover", load("res://ui/styleboxes/sound_mute_hover.tres"))
+		$sound_button.add_theme_stylebox_override("pressed", load("res://ui/styleboxes/sound_mute_hover.tres"))
+	# low sound
+	elif value > 0 and value <= 33:
+		$sound_button.add_theme_stylebox_override("normal", load("res://ui/styleboxes/sound_low_normal.tres"))
+		$sound_button.add_theme_stylebox_override("hover", load("res://ui/styleboxes/sound_low_hover.tres"))
+		$sound_button.add_theme_stylebox_override("pressed", load("res://ui/styleboxes/sound_low_hover.tres"))
+	# middle sound
+	elif value > 33 and value <= 66:
+		$sound_button.add_theme_stylebox_override("normal", load("res://ui/styleboxes/sound_middle_normal.tres"))
+		$sound_button.add_theme_stylebox_override("hover", load("res://ui/styleboxes/sound_middle_hover.tres"))
+		$sound_button.add_theme_stylebox_override("pressed", load("res://ui/styleboxes/sound_middle_hover.tres"))
+	# full sound
+	elif value > 66:
+		$sound_button.add_theme_stylebox_override("normal", load("res://ui/styleboxes/sound_full_normal.tres"))
+		$sound_button.add_theme_stylebox_override("hover", load("res://ui/styleboxes/sound_full_hover.tres"))
+		$sound_button.add_theme_stylebox_override("pressed", load("res://ui/styleboxes/sound_full_hover.tres"))
+
+	Global.save_data()
+
+func play_sound():
+	if $AudioStreamPlayer.is_playing():
+		$AudioStreamPlayer.stop()
+	if Global.state == "focus":
+		$AudioStreamPlayer.stream = load("res://assets/sounds/sound_1.wav")
+		$AudioStreamPlayer.play()
+	elif Global.state == "short_break":
+		$AudioStreamPlayer.stream = load("res://assets/sounds/sound_2.wav")
+		$AudioStreamPlayer.play()
+	elif Global.state == "long_break":
+		$AudioStreamPlayer.stream = load("res://assets/sounds/sound_3.wav")
+		$AudioStreamPlayer.play()

@@ -11,6 +11,8 @@ script = ExtResource("1_eijyo")
 
 [node name="long_break_timer" type="Timer" parent="."]
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
 [connection signal="timeout" from="focus_timer" to="." method="_on_focus_timer_timeout"]
 [connection signal="timeout" from="short_break_timer" to="." method="_on_short_break_timer_timeout"]
 [connection signal="timeout" from="long_break_timer" to="." method="_on_long_break_timer_timeout"]
