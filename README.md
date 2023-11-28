@@ -22,4 +22,4 @@ Pomodroid is available for Windows (as yet)
 
 ## License
 
-MIT &copy; [Christopher Murphy](https://github.com/Splode)
+MIT &copy; [rekvizitt](https://github.com/rekvizitt)
